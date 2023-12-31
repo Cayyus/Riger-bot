@@ -14,11 +14,10 @@ Features:
 
 
 
-## Required modules
+## Required external modules
 - discord.py v2 
 - functools
 - sqlite3 (for database)
 - asyncio
-- os 
-- pathlib
+- typing
 - youtube_dl (for music)
