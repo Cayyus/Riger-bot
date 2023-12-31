@@ -11,8 +11,11 @@ Features:
 - Get an overview of an user
 - Play a coins game and try to get the most coins
 
-### Required modules
-- discord (obviously)
+
+
+
+## Required modules
+- discord.py v2 
 - functools
 - sqlite3 (for database)
 - asyncio
