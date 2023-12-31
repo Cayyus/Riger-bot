@@ -5,6 +5,7 @@ Features:
 - Purge messages
 - Ban and Unban users
 - Kick members from the server
+- Mute members
 - Play music from YouTube
 - Get an overview of the current server
 - Get an overview of an user
@@ -14,3 +15,4 @@ Features:
 - discord (obviously)
 - functools
 - sqlite3 (for database)
+- asyncio
