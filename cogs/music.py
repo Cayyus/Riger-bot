@@ -61,7 +61,7 @@ class MusicCog(commands.Cog):
 
         if voice is None:
             await interaction.followup.send("Bot is not connected to voice channel, use `/join` first.")
-return
+        return
 
         with YoutubeDL(YDL_OPTIONS) as ydl:
             info = ydl.extract_info(song_url, download=False)
