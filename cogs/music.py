@@ -37,7 +37,7 @@ class MusicCog(commands.Cog):
         await interaction.response.defer()
 
         if not interaction.user.voice:
-            await interaction.followup.send("{} is not connected to a voice channel".format(interaction.user.display_name))
+            await interaction.followup.send("`{}` is not connected to a voice channel".format(interaction.user.display_name))
             return
         else:
             channel = interaction.user.voice.channel
@@ -59,8 +59,9 @@ class MusicCog(commands.Cog):
         guild = interaction.guild
         voice = guild.voice_client
 
-        if not voice.is_connected():
-            await interaction.followup.send("Bot is not connected to voice channel, use /join first.")
+        if voice is None:
+            await interaction.followup.send("Bot is not connected to voice channel, use `/join` first.")
+return
 
         with YoutubeDL(YDL_OPTIONS) as ydl:
             info = ydl.extract_info(song_url, download=False)
