@@ -3,6 +3,7 @@ from discord import app_commands, Interaction, ButtonStyle, Embed, Colour, FFmpe
 from discord.ui import button, View
 from discord.ext import commands
 from youtube_dl import YoutubeDL
+import logging
 
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 YDL_OPTIONS = {'format': 'bestaudio'}
@@ -14,6 +15,7 @@ class ButtonMenu(View):
 
     @button(emoji="⏸️", style=ButtonStyle.blurple)
     async def pause(self, interaction: Interaction, button: button):
+        await interaction.response.defer()
         voice_client = interaction.message.guild.voice_client
         if voice_client.is_playing():
             await interaction.followup.send("Paused", ephemeral=True)
@@ -21,10 +23,10 @@ class ButtonMenu(View):
     
     @button(emoji="▶️", style=ButtonStyle.blurple)
     async def resume(self, interaction: Interaction, button: button):
+        await interaction.response.defer()
         voice_client = interaction.message.guild.voice_client
         if voice_client.is_paused():
             await voice_client.resume()
-            await interaction.followup.send("Resumed", ephemeral=True)
 
 class MusicCog(commands.Cog):
     def __init__(self, bot) -> None:
@@ -39,11 +41,13 @@ class MusicCog(commands.Cog):
             return
         else:
             channel = interaction.user.voice.channel
-        await channel.connect()
-        await interaction.followup.send("Bot is connected!")
-    
+            await channel.connect()
+            await interaction.followup.send("Bot is connected!")
+
+
     @app_commands.command(name='disconnect', description='Disconnect the bot from the voice channel')
     async def leave_vc(self, interaction: Interaction):
+       await interaction.response.defer()
        voice_client = interaction.guild.voice_client
        if voice_client.is_connected():
         await voice_client.disconnect()
@@ -52,14 +56,17 @@ class MusicCog(commands.Cog):
     @app_commands.command(name='play', description='Play a song from Youtube')
     async def play(self, interaction: Interaction, song_url: str):
         await interaction.response.defer()
+        guild = interaction.guild
+        voice = guild.voice_client
+
+        if not voice.is_connected():
+            await interaction.followup.send("Bot is not connected to voice channel, use /join first.")
 
         with YoutubeDL(YDL_OPTIONS) as ydl:
             info = ydl.extract_info(song_url, download=False)
             url2 = info['formats'][0]['url']
             song_title = info.get('title', None)
 
-            guild = interaction.guild
-            voice = guild.voice_client
             voice.play(FFmpegPCMAudio(url2, **FFMPEG_OPTIONS))
 
         embed = Embed(title='Playing song', colour=Colour.dark_green())
