@@ -19,5 +19,6 @@ Features:
 - functools
 - sqlite3 (for database)
 - asyncio
-- os
+- os 
+- pathlib
 - youtube_dl (for music)
