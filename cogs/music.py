@@ -52,30 +52,49 @@ class MusicCog(commands.Cog):
        if voice_client.is_connected():
         await voice_client.disconnect()
         await interaction.followup.send("Bot Disconnected.")
+
+
     
+    def play_next(self, interaction: Interaction):
+        if len(self.song_queue) >= 1:
+            song = self.song_queue.pop(0)
+
+            guild = interaction.guild
+            voice = guild.voice_client
+
+            with YoutubeDL(YDL_OPTIONS) as ydl:
+                info = ydl.extract_info(song, download=False)
+                url2 = info['formats'][0]['url']
+                song_title = info.get('title', None)
+
+                voice.play(FFmpegPCMAudio(url2, **FFMPEG_OPTIONS), after=lambda e: self.play_next(interaction))
+
+                embed = Embed(title='Playing song', colour=Colour.dark_green())
+                embed.add_field(name='Now Playing', value=song_title)
+
+                view = ButtonMenu()
+                asyncio.run_coroutine_threadsafe(interaction.followup.send(embed=embed, view=view), self.bot.loop)
+    
+
     @app_commands.command(name='play', description='Play a song from Youtube')
     async def play(self, interaction: Interaction, song_url: str):
         await interaction.response.defer()
+        self.song_queue.append(song_url)
+
         guild = interaction.guild
         voice = guild.voice_client
 
         if voice is None:
-            await interaction.followup.send("Bot is not connected to voice channel, use `/join` first.")
+            await interaction.followup.send('Not connected to voice channel, use `/join` first.')
             return
 
-        with YoutubeDL(YDL_OPTIONS) as ydl:
-            info = ydl.extract_info(song_url, download=False)
-            url2 = info['formats'][0]['url']
-            song_title = info.get('title', None)
+        if not voice.is_playing():
+            self.play_next(interaction)
 
-            voice.play(FFmpegPCMAudio(url2, **FFMPEG_OPTIONS))
-
-        embed = Embed(title='Playing song', colour=Colour.dark_green())
-        embed.add_field(name='Now Playing', value=song_title)
-
-        view = ButtonMenu()
-        await interaction.followup.send(embed=embed, view=view)
+        await interaction.followup.send("Song added to queue.")
     
+
+
 
 async def setup(bot):
     await bot.add_cog(MusicCog(bot))
