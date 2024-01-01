@@ -15,7 +15,7 @@ Features:
 
 
 ## Required external modules
-- discord.py v2 
+- discord.py v2 (built on latest version 2.3.2)
 - functools
 - sqlite3 (for database)
 - asyncio
