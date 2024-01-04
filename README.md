@@ -10,6 +10,7 @@ Features:
 - Get an overview of the current server
 - Get an overview of an user
 - Play a coins game and try to get the most coins
+- Trivia quizzes and leaderboard (in progress)
 
 
 
