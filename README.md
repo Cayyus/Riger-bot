@@ -9,6 +9,7 @@ Features:
 - Play music from YouTube
 - Get an overview of the current server
 - Get an overview of an user
+- See information about a specific role and who their members are in a neat, paged format
 - Play a coins game and try to get the most coins
 - Trivia quizzes and leaderboard (in progress)
 
