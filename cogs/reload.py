@@ -66,12 +66,6 @@ class HotReload(commands.Cog):
             time = os.path.getmtime(path)
             self.last_modified_time[extension] = time
 
-
-#def setup(bot):
-    #cog = HotReload(bot)
-    #bot.add_cog(cog)
-
-# For d.py 2.0, comment the above setup function and uncomment the below
 async def setup(bot):
     cog = HotReload(bot)
     await bot.add_cog(cog)
