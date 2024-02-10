@@ -12,6 +12,8 @@ Features:
 - See information about a specific role and who their members are in a neat, paged format
 - Play a coins game and try to get the most coins
 - Trivia quizzes and leaderboard (in progress)
+- Build embeds
+- Play a cool farm minigame
 
 
 
