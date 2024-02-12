@@ -11,7 +11,9 @@ Features:
 - Get an overview of an user
 - See information about a specific role and who their members are in a neat, paged format
 - Play a coins game and try to get the most coins
-- Trivia quizzes and leaderboard (in progress)
+
+## Work in Progress
+- Trivia quizzes and leaderboard 
 - Build embeds
 - Play a cool farm minigame
 
