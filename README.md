@@ -1,7 +1,7 @@
 # Riger-bot
  A multi-purpose discord bot that can do a variety of tasks, such as rolling, deroling, purge messages, ban, play music and much more!
 
-Features:
+## Features
 - Purge messages
 - Ban and Unban users
 - Kick members from the server
