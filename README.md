@@ -13,7 +13,6 @@
 - Play a coins game and try to get the most coins
 
 ## Work in Progress
-- Trivia quizzes and leaderboard 
 - Build embeds
 - Play a cool farm minigame
 
