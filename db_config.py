@@ -1,7 +1,9 @@
 import sqlite3
 
 db = sqlite3.connect('coins.db')
+db2 = sqlite3.connect('farm.db')
 
+#cursor obj
 cursor = db.cursor()
 
 class UserDB:
@@ -31,7 +33,12 @@ class UserDB:
             print(columns)
 
     def insert_user(self):
-        cursor.execute(f"INSERT INTO users (username, user_id, coins, last_ran) VALUES ('{self.username}', '{self.uid}', '{self.coins}', '{self.last_played}')")
+        last_ran = 0
+        cursor.execute(f"INSERT INTO users (username, user_id, coins, last_ran) VALUES ('{self.username}', '{self.uid}', '{self.coins}', '{last_ran}')")
+        db.commit()
+
+    def delete_user(self):
+        cursor.execute(f"DELETE FROM users WHERE user_id = ?", (self.uid,))
         db.commit()
     
     def get_rows(self):
