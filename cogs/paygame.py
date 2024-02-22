@@ -1,7 +1,6 @@
 from discord.ext import commands
 from discord import app_commands
 from discord import Interaction, Member, Embed
-from datetime import datetime
 from db_config import UserDB
 from tabulate import tabulate
 
@@ -19,11 +18,11 @@ class PayGame(commands.Cog):
 
         db = UserDB(username, usr_id, coins)
         db_user = db.select_user()
-        db_last_ran = db.get_last_played()
+        current_time = int(interaction.created_at.timestamp())
 
         if db_user:  # if user in db
-            current_time = int(interaction.created_at.timestamp())
-            timeout = db_last_ran + 10800  # Add 3 hours to the last run time
+            db_last_ran = db.get_last_played()
+            timeout = int(db_last_ran) + 10800  # Add 3 hours to the last run time
 
             if current_time < timeout:
                 await interaction.followup.send(f'Timeout! Please try again <t:{timeout}:R>.')
@@ -34,6 +33,7 @@ class PayGame(commands.Cog):
 
         else:  # if user not in db
             db.insert_user()
+            db.update_timestamp(current_time)
             await interaction.followup.send("Here are your coins, enjoy! (+100 credit)")
     
     @app_commands.command(name = 'leaderboard', description='See who has the most coins')
