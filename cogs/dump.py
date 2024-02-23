@@ -1,6 +1,5 @@
-import discord
 from discord.ext import commands
-from discord import app_commands, Interaction, Embed
+from discord import app_commands, Interaction, Embed, Role
 from paginator import ButtonPaginator
 from staticvalues import timestamp_formatting
 
@@ -9,7 +8,7 @@ class RoleDump(commands.Cog):
         self.bot = bot
     
     @app_commands.command(name='dump', description='List out members of specific roles')
-    async def dump(self, interaction: Interaction, role: discord.Role, per_page: int = None):
+    async def dump(self, interaction: Interaction, role: Role, per_page: int = None):
         await interaction.response.defer()
 
         members = role.members
@@ -25,12 +24,7 @@ class RoleDump(commands.Cog):
             member_slice = members[i:i + pages] #members sliced into group of 5
 
             embed = Embed(title=f'Members of {role.name}', colour=role.colour)
-
-            for member in member_slice:
-                name = member.name
-                member_id = member.id
-                member_info = f'{name} - {member_id}'
-                embed.add_field(name="Member - ID", value=member_info, inline=False)
+            embed.add_field(name='Member - ID', value='\n'.join([f"{member.name} - {member.id}" for member in member_slice]), inline=False)
             embeds.append(embed)
         
         role_created = timestamp_formatting(role.created_at)

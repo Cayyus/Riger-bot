@@ -1,6 +1,4 @@
 TOKEN = "API_KEY"
+YT_API_KEY = "API_KEY"
 
-headers = {
-    'Authorization': f'Bot {TOKEN}',
-    'Content-Type': 'application/json'}
     

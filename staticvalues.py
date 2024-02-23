@@ -1,8 +1,5 @@
 from itertools import cycle
 from datetime import datetime
-import httpx
-from discord import Embed
-from credentials import headers
 
 badge_name_id = {
     'hypesquad_bravery': 1158402929728950282,

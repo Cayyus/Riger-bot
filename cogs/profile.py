@@ -1,33 +1,20 @@
-import discord
-from discord import Colour as c
 from discord.ext import commands
-from discord import app_commands, Embed
+from discord import app_commands, Embed, Interaction, Member
 from staticvalues import timestamp_formatting, badge_name_id, status_emotes
-import httpx
-from credentials import headers
-
-
-BASE = 'https://discord.com/api'
 
 class ServerProfile(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
     @app_commands.command(name='user', description='Profile of a user')
-    async def user(self, interaction: discord.Interaction, user: discord.Member):
+    async def user(self, interaction: Interaction, user: Member):
         badges = []
         userbadges = []
 
         user_id = user.id
-        get_profile = httpx.get(f'{BASE}/users/{user_id}', headers=headers)
-        data = get_profile.json()
-        avatar_hash_code = data['avatar']
-        banner_color = data['accent_color']
-        avatar_url = f'https://cdn.discordapp.com/avatars/{user_id}/{avatar_hash_code}.png'
-        
         username = user.name
-        display_name = data['global_name']
-
+        display_name = user.global_name
+        user_avatar = user.avatar
         joined_discord = user.created_at
         joined_server = user.joined_at
         userflags = user.public_flags.all()
@@ -78,20 +65,20 @@ class ServerProfile(commands.Cog):
             ('Joined This Server', f"{fmt_server_t}")
         ]
 
-        embed = Embed(title=f"{user_status} {username.capitalize()}", colour=banner_color)
+        embed = Embed(title=f"{user_status} {username.capitalize()}")
 
         for field in embed_list:
             embed.add_field(name=field[0], value=field[1], inline=True)
         
         embed.add_field(name='Roles', value=usr_roles)
 
-        embed.set_thumbnail(url=avatar_url)
+        embed.set_thumbnail(url=user_avatar)
         embed.set_footer(text=f'User ID: {user_id}')
 
         await interaction.response.send_message(embed=embed)
     
     @app_commands.command(name = 'server', description='Profile of this server')
-    async def server(self, interaction: discord.Interaction):
+    async def server(self, interaction: Interaction):
         statuses = []
 
         guild = interaction.guild
@@ -133,7 +120,7 @@ class ServerProfile(commands.Cog):
             ('Created On', guild_created_t),
         ]
 
-        embed = discord.Embed(title=f"Overview of {guild_name}")
+        embed = Embed(title=f"Overview of {guild_name}")
         for field in embeds:
             embed.add_field(name = field[0], value= field[1], inline=True)
         
