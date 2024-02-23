@@ -79,7 +79,7 @@ class MusicCog(commands.Cog):
                 view = ButtonMenu()
                 run_coroutine_threadsafe(interaction.followup.send(embed=embed, view=view), self.bot.loop)
     
-    @app_commands.command(name = 'search_songs', description='Search songs on YouTube')
+    @app_commands.command(name = 'search-songs', description='Search songs on YouTube')
     async def search_songs(self, interaction: Interaction, query: str):
         await interaction.response.defer()
         if not interaction.user.voice:
