@@ -6,7 +6,7 @@
 - Ban and Unban users
 - Kick members from the server
 - Mute members
-- Play music from YouTube
+- Search and play music from YouTube
 - Get an overview of the current server
 - Get an overview of an user
 - See information about a specific role and who their members are in a neat, paged format
