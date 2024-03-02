@@ -26,3 +26,4 @@
 - asyncio
 - typing
 - youtube_dl (for music)
+- tabulate
