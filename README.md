@@ -13,9 +13,8 @@
 - Play a coins game and try to get the most coins
 
 ## Work in Progress
-- Play a cool farm minigame
-- Edit videos 
-
+- Farm minigame
+- Mining minigame
 
 
 
