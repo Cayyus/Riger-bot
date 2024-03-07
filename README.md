@@ -13,8 +13,7 @@
 - Play a coins game and try to get the most coins
 
 ## Work in Progress
-- Farm minigame
-- Mining minigame
+- A fun mining/farming minigame loosely based on Stardew Valley
 
 
 
