@@ -13,7 +13,7 @@
 - Play a coins game and try to get the most coins
 
 ## Work in Progress
-- A fun mining/farming minigame
+- TTS command
 
 
 
