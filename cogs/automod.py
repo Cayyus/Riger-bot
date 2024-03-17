@@ -140,7 +140,7 @@ class AutoModCog(commands.Cog):
             for perm in perms:
                 permissions = Permissions(perm)
                 if not permissions.moderate_members:
-                    await interaction.followup.send('You cannot timeout members.')
+                    await interaction.followup.send('You cannot remove timeout from members.')
                 else:
                     if not target.is_timed_out():
                         await interaction.followup.send(f'{target.name} is not timed out.')
