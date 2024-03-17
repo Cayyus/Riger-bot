@@ -11,9 +11,10 @@
 - Get an overview of an user
 - See information about a specific role and who their members are in a neat, paged format
 - Play a coins game and try to get the most coins
+- Text-to-Speech 
 
 ## Work in Progress
-- TTS command
+- Image Editor
 
 
 
