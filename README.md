@@ -15,6 +15,7 @@
 
 ## Work in Progress
 - Image Editor
+- Quote Generator 
 
 
 
