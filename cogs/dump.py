@@ -1,7 +1,7 @@
 from discord.ext import commands
 from discord import app_commands, Interaction, Embed, Role
-from paginator import ButtonPaginator
-from staticvalues import timestamp_formatting
+from utils.paginators.dump_paginator import Paginator
+from utils.formatters import timestamp_formatting
 
 class RoleDump(commands.Cog):
     def __init__(self, bot):
@@ -36,9 +36,10 @@ class RoleDump(commands.Cog):
         role_info.add_field(name = 'Total Members', value=total_members)
         role_info.set_footer(text=f'Role ID: {role_id}')
 
-        paginator = ButtonPaginator(pages=embeds, per_page=1)
+        paginator = Paginator(pages=embeds, per_page=1)
         await interaction.followup.send(embed=role_info, view=paginator)
 
     
 async def setup(bot):
     await bot.add_cog(RoleDump(bot))
+
