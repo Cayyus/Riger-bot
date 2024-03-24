@@ -131,7 +131,7 @@ class AutoModCog(commands.Cog):
                 await interaction.followup.send('An error occured, try again.')
                 print(e)
 
-    @app_commands.command(name='remove_timeout', description='Remove a timeout from a member')
+    @app_commands.command(name='remove-timeout', description='Remove a timeout from a member')
     async def remove_timeout(self, interaction: Interaction, target: Member):
         try:
             await interaction.response.defer()
