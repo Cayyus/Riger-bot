@@ -1,6 +1,6 @@
 from discord.ext import commands
 from discord import app_commands, Embed, Interaction, Member
-from staticvalues import timestamp_formatting, badge_name_id, status_emotes
+from utils.formatters import timestamp_formatting, badge_name_id, status_emotes
 
 class ServerProfile(commands.Cog):
     def __init__(self, bot):
