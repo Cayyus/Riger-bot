@@ -1,17 +1,20 @@
 import discord
-import os
 from discord.ext import commands
-from credentials import TOKEN
+import os
 import asyncio
 import logging
+from dotenv import load_dotenv
 
 logging.basicConfig(level=logging.INFO)
 
 intents = discord.Intents.all()
 
-bot = commands.Bot(command_prefix='.', intents=intents)
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+load_dotenv('tokens.env')
 
 @bot.command(name="sync")
+@commands.has_role('King')
 async def sync(ctx):
     synced = await bot.tree.sync()
     logging.info(f"Synced {len(synced)} command(s).")
@@ -23,6 +26,7 @@ async def load():
 
 async def main():
     await load()
-    await bot.start(TOKEN)
+    await bot.start(os.environ.get('TOKEN'))
 
 asyncio.run(main())
+
