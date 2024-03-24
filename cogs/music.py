@@ -6,7 +6,10 @@ from youtube_dl import YoutubeDL
 from asyncio import run_coroutine_threadsafe
 from googleapiclient.discovery import build
 
-from credentials import YT_API_KEY
+from dotenv import load_dotenv
+import os
+
+load_dotenv('tokens.env')
 
 FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
 YDL_OPTIONS = {'format': 'bestaudio'}
@@ -79,7 +82,7 @@ class MusicCog(commands.Cog):
                 view = ButtonMenu()
                 run_coroutine_threadsafe(interaction.followup.send(embed=embed, view=view), self.bot.loop)
     
-    @app_commands.command(name = 'search-songs', description='Search songs on YouTube')
+    @app_commands.command(name = 'search_songs', description='Search songs on YouTube')
     async def search_songs(self, interaction: Interaction, query: str):
         await interaction.response.defer()
         if not interaction.user.voice:
@@ -89,7 +92,7 @@ class MusicCog(commands.Cog):
         title_lst, channel_lst, link_lst = [], [], []
         embed = Embed(title = 'Results')
 
-        youtube = build('youtube', 'v3', developerKey=YT_API_KEY)
+        youtube = build('youtube', 'v3', developerKey=os.environ.get('YT_API_KEY'))
         search_response = youtube.search().list(
             q=query,
             part='id,snippet',
@@ -111,7 +114,7 @@ class MusicCog(commands.Cog):
 
         
         for title, channel, vid_link in zip(title_lst, channel_lst, link_lst):
-            embed.add_field(name = '\u200b', value = f"{title} - {channel}\n{vid_link}")
+            embed.add_field(name='\u200b', value = f"{title} - {channel}\n{vid_link}")
         
         await interaction.followup.send(embed=embed)
 
@@ -131,4 +134,8 @@ class MusicCog(commands.Cog):
             self.play_next(interaction)
 
         await interaction.followup.send("Song added to queue.")
+        
+
+async def setup(bot):
+    await bot.add_cog(MusicCog(bot))
         
