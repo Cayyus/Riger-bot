@@ -15,12 +15,11 @@
 - Get an overview of an user
 - See information about a specific role and who their members are in a neat, paged format
 - Play a coins game and try to get the most coins
-- Text-to-Speech 
+- Text-to-Speech
+- Generate quote from messages
 
 ## Work in Progress
 - Image Editor
-- Quote Generator 
-
 
 
 ## Required external modules
@@ -31,3 +30,4 @@
 - typing
 - youtube_dl (for music)
 - tabulate
+- pillow
