@@ -19,7 +19,7 @@
 - Generate quote from messages
 
 ## Work in Progress
-- Image Editor
+- Minecraft 2D Simulator
 
 
 ## Modules Used
