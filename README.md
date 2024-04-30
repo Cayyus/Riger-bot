@@ -20,6 +20,7 @@
 
 ## Work in Progress
 - Minecraft 2D Simulator
+- Wikipedia search
 
 
 ## Modules Used
