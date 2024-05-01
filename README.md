@@ -19,7 +19,7 @@
 - Generate quote from messages
 
 ## Work in Progress
-- Minecraft 2D Simulator
+- Wordle game
 - Wikipedia search
 
 
