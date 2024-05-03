@@ -21,6 +21,7 @@
 ## Work in Progress
 - Wordle game
 - Wikipedia search
+- Random reddit post
 
 
 ## Modules Used
