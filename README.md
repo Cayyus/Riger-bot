@@ -22,6 +22,7 @@
 - Wordle game
 - Wikipedia search
 - Random reddit post
+- Trivia
 
 
 ## Modules Used
