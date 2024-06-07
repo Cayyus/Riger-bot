@@ -69,7 +69,7 @@ class LeisureCog(commands.Cog):
         tts.save(filename)
         return filename
 
-    @app_commands.command(name='tts', description='Turn text into voice')
+   @app_commands.command(name='tts', description='Turn text into voice')
     async def tts(self, interaction: Interaction, text: str, dm: bool = False):
         await interaction.response.defer(ephemeral=True)
         file = self.sound_to_text(text)
@@ -79,7 +79,8 @@ class LeisureCog(commands.Cog):
             os.remove(file)
             await interaction.followup.send("Sent!", ephemeral=True)
         else:
-            await interaction.followup.send("Here's your file:", file=File(file))
+            await interaction.followup.send("Processing...", ephemeral=True)
+            await interaction.followup.send("Here's your file:", file=File(file), ephemeral=False)
             os.remove(file)
 
     @app_commands.command(name='generate-quote', description='Quote someone')
