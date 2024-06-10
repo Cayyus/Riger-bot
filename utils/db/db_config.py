@@ -67,11 +67,11 @@ class UserDB:
         (timestamp,) = timestamp
         return timestamp
 
-    def update_coin_count(self):
+    def update_coin_count(self, amount):
         self.cursor.execute("SELECT coins FROM users WHERE user_id = ?;", (self.uid,))
         value = self.cursor.fetchall()[0]
         (coins,) = value
-        new_coins = int(coins) + 100
+        new_coins = int(coins) + amount
         self.cursor.execute("UPDATE users SET coins = ? where user_id = ?", (new_coins, self.uid,))
         self.connection.commit()
     
