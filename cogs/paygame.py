@@ -27,7 +27,7 @@ class PayGame(commands.Cog):
             if current_time < timeout:
                 await interaction.followup.send(f'Timeout! Please try again <t:{timeout}:R>.', ephemeral=True)
             else:
-                db.update_coin_count()
+                db.update_coin_count(amount=coins)
                 db.update_timestamp(current_time)
                 await interaction.followup.send("Here's your coins! (+100 credit)")
 
