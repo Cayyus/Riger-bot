@@ -17,6 +17,7 @@
 - Play a coins game and try to get the most coins
 - Text-to-Speech
 - Generate quote from messages
+- Trivia
 
 ## Work in Progress
 - Wordle game
