@@ -42,6 +42,12 @@ class UserDB:
         self.cursor.execute("SELECT * FROM users;")
         rows = self.cursor.fetchall()
         return rows
+    
+    def get_username(self):
+        self.cursor.execute(f"SELECT username FROM users WHERE user_id = ?;", (self.uid,))
+        name = self.cursor.fetchall()[0]
+        (name,) = name
+        return name
 
     def select_user(self):
         self.cursor.execute(f"SELECT * FROM users WHERE user_id = ?;", (self.uid,))
@@ -67,11 +73,14 @@ class UserDB:
         (timestamp,) = timestamp
         return timestamp
 
-    def update_coin_count(self, amount):
+    def update_coin_count(self, amount, type):
         self.cursor.execute("SELECT coins FROM users WHERE user_id = ?;", (self.uid,))
         value = self.cursor.fetchall()[0]
         (coins,) = value
-        new_coins = int(coins) + amount
+        if type == "+":
+            new_coins = int(coins) + amount
+        else:
+            new_coins = int(coins) - amount
         self.cursor.execute("UPDATE users SET coins = ? where user_id = ?", (new_coins, self.uid,))
         self.connection.commit()
     
@@ -81,4 +90,4 @@ class UserDB:
     
     def update_username(self):
         self.cursor.execute("UPDATE users SET username = ? where user_id = ?", (self.username, self.uid,))
-        self.connection.commit()
+        self.connection.commit(
