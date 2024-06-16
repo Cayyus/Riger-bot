@@ -20,14 +20,19 @@ class PayGame(commands.Cog):
         db_user = db.select_user()
         current_time = int(interaction.created_at.timestamp())
 
-        if db_user:  # if user in db
+        if db_user: # if user in db
+            name = db.get_username()
+            
+            if name != interaction.user.name:
+                db.update_username()
+            
             db_last_ran = db.get_last_played()
             timeout = int(db_last_ran) + 7200  # Add 2 hours to the last run time
 
             if current_time < timeout:
                 await interaction.followup.send(f'Timeout! Please try again <t:{timeout}:R>.', ephemeral=True)
             else:
-                db.update_coin_count(amount=coins)
+                db.update_coin_count(amount=coins, type='+')
                 db.update_timestamp(current_time)
                 await interaction.followup.send("Here's your coins! (+100 credit)")
 
