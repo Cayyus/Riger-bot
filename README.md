@@ -23,7 +23,7 @@
 - Wordle game
 - Wikipedia search
 - Random reddit post
-- Trivia
+- Embed Generator
 
 
 ## Modules Used
