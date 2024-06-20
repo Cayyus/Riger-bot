@@ -35,3 +35,6 @@
 - youtube_dl (for music)
 - tabulate
 - pillow
+- asyncpraw
+- wikipedia
+- httpx
