@@ -90,4 +90,4 @@ class UserDB:
     
     def update_username(self):
         self.cursor.execute("UPDATE users SET username = ? where user_id = ?", (self.username, self.uid,))
-        self.connection.commit(
+        self.connection.commit()
