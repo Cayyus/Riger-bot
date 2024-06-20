@@ -1,5 +1,5 @@
 from discord.ext import commands
-from discord import app_commands, Interaction, File
+from discord import app_commands, Interaction, File, Embed
 from discord.errors import NotFound, HTTPException
 
 from gtts import gTTS
@@ -8,6 +8,9 @@ import os
 import httpx
 from PIL import Image, ImageFont, ImageDraw, ImageEnhance
 from io import BytesIO
+
+import wikipedia
+from functools import lru_cache
 
 
 FONT_BIG = ImageFont.truetype('OpenSans-CondensedSemiBoldItalic.ttf', 72)
@@ -58,6 +61,10 @@ def make_quote_image(text, author_img):
     
     return image_bytes
 
+@lru_cache(maxsize=20)
+def query_search_results(current):
+    options = wikipedia.search(current)
+    return options
 
 class LeisureCog(commands.Cog):
     def __init__(self, bot):
@@ -69,7 +76,29 @@ class LeisureCog(commands.Cog):
         tts.save(filename)
         return filename
 
-   @app_commands.command(name='tts', description='Turn text into voice')
+    @app_commands.command(name='search_wiki', description='Search wikipedia')
+    @app_commands.describe(query='Page to search')
+    async def wiki_search(self, interaction: Interaction, query: str):
+        await interaction.response.defer()
+        page = wikipedia.page(query)
+        embed = Embed()
+        embed.title = page.title
+        embed.url = page.url
+        embed.description = f"***Description***:\n{page.summary}"
+        embed.set_thumbnail(url=page.images[0])
+        embed.set_footer(text=f"Page ID: {page.pageid}", icon_url="https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png")
+        await interaction.followup.send(embed=embed)
+
+    @wiki_search.autocomplete('query')
+    async def query_autocomplete_callback(self, interaction: Interaction, current: str):
+        options = query_search_results(current)
+
+        return [
+            app_commands.Choice(name=option, value=option)
+            for option in options if current.lower() in option.lower()
+        ]
+
+    @app_commands.command(name='tts', description='Turn text into voice')
     async def tts(self, interaction: Interaction, text: str, dm: bool = False):
         await interaction.response.defer(ephemeral=True)
         file = self.sound_to_text(text)
@@ -79,7 +108,7 @@ class LeisureCog(commands.Cog):
             os.remove(file)
             await interaction.followup.send("Sent!", ephemeral=True)
         else:
-            await interaction.followup.send("Processing...", ephemeral=True)
+            await interaction.followup.send("Processing..", ephemeral=True)
             await interaction.followup.send("Here's your file:", file=File(file), ephemeral=False)
             os.remove(file)
 
@@ -107,5 +136,8 @@ class LeisureCog(commands.Cog):
             else:
                 await interaction.followup.send('Failed to fetch user avatar.', ephemeral=True)
 
+    
 async def setup(bot):
     await bot.add_cog(LeisureCog(bot))
+
+
