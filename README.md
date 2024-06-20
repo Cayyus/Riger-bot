@@ -18,11 +18,11 @@
 - Text-to-Speech
 - Generate quote from messages
 - Trivia
+- Wikipedia search
+- Random reddit post
 
 ## Work in Progress
 - Wordle game
-- Wikipedia search
-- Random reddit post
 - Embed Generator
 
 
