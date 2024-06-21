@@ -24,6 +24,7 @@
 ## Work in Progress
 - Wordle game
 - Embed Generator
+- Colour Picker
 
 
 ## Modules Used
