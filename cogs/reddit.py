@@ -7,8 +7,6 @@ import asyncpraw
 import asyncio
 import random
 
-from RedDownloader import RedDownloader
-
 from asyncprawcore.exceptions import NotFound
 
 from dotenv import load_dotenv
