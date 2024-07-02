@@ -14,7 +14,6 @@ bot = commands.Bot(command_prefix='$', intents=intents)
 load_dotenv('tokens.env')
 
 @bot.command(name="sync")
-@commands.has_role('King')
 async def sync(ctx):
     synced = await bot.tree.sync()
     logging.info(f"Synced {len(synced)} command(s).")
