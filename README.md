@@ -1,5 +1,5 @@
 # Riger-bot
- A multi-purpose discord bot with a variety of tasks and features, such as rolling, deroling, purging messages, ban, playing music and much more!
+ A multi-purpose discord bot with a variety of tasks and features, such as rolling, deroling, purging messages, ban and much more!
 
  <b>Note: A `tokens.env` file with the bot's token and additionally the API Key for YouTube should be made in the root directory, in the format:</b>
  `TOKEN='token'`<br>
@@ -10,7 +10,6 @@
 - Ban and Unban users
 - Kick members from the server
 - Mute members
-- Search and play music from YouTube
 - Get an overview of the current server
 - Get an overview of an user
 - See information about a specific role and who their members are in a neat, paged format
