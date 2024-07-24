@@ -1,9 +1,8 @@
 # Riger-bot
  A multi-purpose discord bot with a variety of tasks and features, such as rolling, deroling, purging messages, ban and much more!
 
- <b>Note: A `tokens.env` file with the bot's token and additionally the API Key for YouTube should be made in the root directory, in the format:</b>
- `TOKEN='token'`<br>
- `YT_API_KEY='api_key'`
+ <b>Note: A `tokens.env` file with the bot's token should be made in the root directory, in the format:</b>
+ `TOKEN='token'`
 
 ## Features
 - Purge messages
