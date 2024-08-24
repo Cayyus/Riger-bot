@@ -5,7 +5,7 @@ import asyncio
 import logging
 from dotenv import load_dotenv
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S', level=logging.INFO)
 
 intents = discord.Intents.all()
 
