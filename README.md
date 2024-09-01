@@ -31,7 +31,6 @@
 - sqlite3 (for database)
 - asyncio
 - typing
-- youtube_dl (for music)
 - tabulate
 - pillow
 - asyncpraw
