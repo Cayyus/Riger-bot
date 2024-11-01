@@ -23,6 +23,7 @@
 - Wordle game
 - Embed Generator
 - Colour Picker
+- Chess Game
 
 
 ## Libraries Used
