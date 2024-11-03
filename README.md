@@ -24,6 +24,7 @@
 - Embed Generator
 - Colour Picker
 - Chess Game
+- Summary from a YouTube video
 
 
 ## Libraries Used
