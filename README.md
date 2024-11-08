@@ -20,7 +20,6 @@
 - Random reddit post
 
 ## Work in Progress
-- Wordle game
 - Embed Generator
 - Colour Picker
 - Chess Game
