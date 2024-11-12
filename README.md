@@ -22,8 +22,7 @@
 ## Work in Progress
 - Embed Generator
 - Colour Picker
-- Chess Game
-- Summary from a YouTube video
+- Chess Game (AI games too)
 
 
 ## Libraries Used
